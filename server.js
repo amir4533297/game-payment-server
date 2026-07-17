@@ -4,23 +4,38 @@ const app = express();
 
 app.use(express.json());
 
-// تست سرور
+let coins = 0;
+
+// تست
 app.get("/", (req, res) => {
     res.json({
-        status: "online",
-        message: "Game Payment Server is Running 🚀"
+        status: "online"
     });
 });
 
-// تست API
-app.get("/ping", (req, res) => {
+// گرفتن تعداد سکه
+app.get("/coins", (req, res) => {
     res.json({
-        success: true
+        coins: coins
     });
+});
+
+// اضافه کردن سکه
+app.post("/addcoins", (req, res) => {
+
+    const amount = req.body.amount;
+
+    coins += amount;
+
+    res.json({
+        success: true,
+        coins: coins
+    });
+
 });
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log("Server Started On Port " + PORT);
+    console.log("Server Started");
 });
