@@ -21,19 +21,15 @@ app.get("/coins", (req, res) => {
 });
 
 // اضافه کردن سکه
-app.post("/addcoins", (req, res) => {
+app.get("/add", (req, res) => {
 
-    const amount = req.body.amount;
-
-    coins += amount;
+    coins += 100;
 
     res.json({
-        success: true,
         coins: coins
     });
 
 });
-
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
