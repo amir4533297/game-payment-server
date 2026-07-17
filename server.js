@@ -4,7 +4,7 @@ const app = express();
 
 app.use(express.json());
 
-let coins = 0;
+let coins = 500;
 
 // تست
 app.get("/", (req, res) => {
