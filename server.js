@@ -2,14 +2,18 @@ const express = require("express");
 
 const app = express();
 
-let coins = 500;
+app.use(express.json());
+
+let coins = 700;
 
 
 // تست آنلاین بودن سرور
 app.get("/", (req, res) => {
+
     res.json({
         status: "online"
     });
+
 });
 
 
@@ -23,10 +27,26 @@ app.get("/coins", (req, res) => {
 });
 
 
-// اضافه کردن 100 سکه (تست خرید)
-app.get("/add", (req, res) => {
+// خرید سکه (فعلاً تستی)
+app.get("/buy", (req, res) => {
 
     coins += 100;
+
+    res.json({
+        success: true,
+        message: "Coins Added",
+        coins: coins
+    });
+
+});
+
+
+// اضافه کردن سکه با مقدار دلخواه (فعلاً تست)
+app.post("/addcoins", (req, res) => {
+
+    const amount = req.body.amount || 0;
+
+    coins += amount;
 
     res.json({
         success: true,
@@ -39,5 +59,7 @@ app.get("/add", (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
+
     console.log("Server Started On Port " + PORT);
+
 });
